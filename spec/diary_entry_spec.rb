@@ -1,5 +1,4 @@
 require 'diary_entry'
-require 'diary'
 
 RSpec.describe DiaryEntry do
   describe '#reading_chunk' do
