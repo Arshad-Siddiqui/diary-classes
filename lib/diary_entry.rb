@@ -7,13 +7,7 @@ class DiaryEntry
     # @contents and @title are strings
   end
 
-  def title
-    @title
-  end
-
-  def contents
-    @contents
-  end
+  attr_reader :title, :contents
 
   def count_words
     # Returns the number of words in the contents as an integer
