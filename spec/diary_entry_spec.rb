@@ -28,4 +28,18 @@ RSpec.describe DiaryEntry do
       expect(my_entry.reading_chunk(2, 2)).to eq 'one space two space'
     end
   end
+
+  describe '#reading_time' do
+    context 'contents is 6 words long' do
+      it 'returns 6 when wpm is 1' do
+        my_entry = DiaryEntry.new('monday', 'one space two space three space')
+        expect(my_entry.reading_time(1)).to eq 6
+      end
+
+      it 'returns 3 when wpm is 2' do
+        my_entry = DiaryEntry.new('monday', 'one space two space three space')
+        expect(my_entry.reading_time(2)).to eq 3
+      end
+    end
+  end
 end
