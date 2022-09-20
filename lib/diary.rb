@@ -12,7 +12,7 @@ class Diary
     diary_string = @diary_entries.map {|entry|
       "#{entry.title}: #{entry.contents}"
     }
-    diary_string.join(',\n')
+    diary_string.join(",\n")
   end
 
   def count_words
