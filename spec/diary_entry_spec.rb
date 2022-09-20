@@ -27,6 +27,11 @@ RSpec.describe DiaryEntry do
       my_entry.reading_chunk(2, 2)
       expect(my_entry.reading_chunk(2, 2)).to eq 'one space two space'
     end
+
+    it 'returns chunk with odd number of words' do
+      my_entry = DiaryEntry.new('monday', 'one space two space three space four space five space')
+      expect(my_entry.reading_chunk(1, 3)).to eq 'one space two'
+    end
   end
 
   describe '#reading_time' do
