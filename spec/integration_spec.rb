@@ -39,4 +39,41 @@ RSpec.describe 'Diary Integration' do
       expect(diary.count_words).to eq 11
     end
   end
+
+  describe '#reading_time' do
+    context 'Can read 2 wpm' do
+      it 'returns reading time with 1 instance' do
+        diary = Diary.new
+        diary_entry1 = DiaryEntry.new("Monday", "I woke up and did some coding")
+        diary.add diary_entry1
+        expect(diary.reading_time(2)).to eq 4
+      end
+
+      it 'returns reading time with 2 instances' do
+        diary = Diary.new
+        diary_entry1 = DiaryEntry.new("Monday", "I woke up and did some coding")
+        diary_entry2 = DiaryEntry.new("Tuesday", "Did some more coding")
+        diary.add(diary_entry1)
+        diary.add(diary_entry2)
+        expect(diary.reading_time(2)).to eq 6
+      end
+    end
+  end
+
+  describe '#find_best_entry_for_reading_time' do
+    context '3 wpm and 2 minutes' do
+      it 'returns largest reading chunk that is smaller than 6' do
+        diary = Diary.new
+        diary_entry1 = DiaryEntry.new("Monday", "I woke up and did some coding")
+        diary_entry2 = DiaryEntry.new("Tuesday", "Did some more coding")
+        diary_entry3 = DiaryEntry.new("Wednesday", "Watched netflix, then some coding")
+        diary_entry4 = DiaryEntry.new("Thursday", "This string is 6 words long")
+        diary.add(diary_entry1)
+        diary.add(diary_entry2)
+        diary.add(diary_entry3)
+        diary.add(diary_entry4)
+        expect(diary.find_best_entry_for_reading_time(3, 2)).to eq "Thursday: This string is 6 words long"
+      end
+    end
+  end
 end

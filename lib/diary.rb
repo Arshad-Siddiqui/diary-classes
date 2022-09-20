@@ -28,20 +28,22 @@ class Diary
   end
 
   def find_best_entry_for_reading_time(wpm, minutes)
-        # `wpm` is an integer representing the number of words the user can read
-        # per minute.
-        # `minutes` is an integer representing the number of minutes the user
-        # has to read.
-    # Returns an instance of diary entry representing the entry that is closest 
-    # to, but not over, the length that the user could read in the minutes they
-    # have available given their reading speed.
+    # Finds largest entry that reader can complete within given time
+    # Factoring in reading speeed.
+
+    # Filters any entries that are larger than what the reader can read
+    # in allotted time.
     words_to_read = wpm * minutes
     filtered_array = @diary_entries.select {|entry|
       entry.count_words <= words_to_read
     }
+
+    # Gets largest entry from filtered list based on amount of contents.
     largest_entry = filtered_array.max_by {|entry|
       entry.count_words
     }
-    largest_entry
+
+    # Returns largest object
+    "#{largest_entry.title}: #{largest_entry.contents}"
   end
 end
