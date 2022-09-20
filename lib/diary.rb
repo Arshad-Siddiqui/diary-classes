@@ -8,7 +8,11 @@ class Diary
   end
 
   def all
-    @diary_entries
+    # @diary_entries
+    diary_string = @diary_entries.map {|entry|
+      "#{entry.title}: #{entry.contents}"
+    }
+    diary_string.join(',\n')
   end
 
   def count_words
