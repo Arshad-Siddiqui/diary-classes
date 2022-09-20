@@ -8,7 +8,6 @@ class Diary
   end
 
   def all
-    # @diary_entries
     diary_string = @diary_entries.map {|entry|
       "#{entry.title}: #{entry.contents}"
     }
@@ -18,19 +17,14 @@ class Diary
   def count_words
     @word_count = 0
     # Returns the number of words in all diary entries
-    # HINT: This method should make use of the `count_words` method on DiaryEntry.
     @diary_entries.each do |entry|
       @word_count += entry.count_words
     end
     @word_count
   end
 
-  def reading_time(wpm) # wpm is an integer representing
-                        # the number of words the user can read per minute
-    # Returns an integer representing an estimate of the reading time in minutes
-    # if the user were to read all entries in the diary.
+  def reading_time(wpm)
     (count_words.to_f / wpm).ceil
-
   end
 
   def find_best_entry_for_reading_time(wpm, minutes)
