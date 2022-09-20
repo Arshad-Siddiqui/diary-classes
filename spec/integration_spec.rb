@@ -62,7 +62,7 @@ RSpec.describe 'Diary Integration' do
 
   describe '#find_best_entry_for_reading_time' do
     context '3 wpm and 2 minutes' do
-      it 'returns largest reading chunk that is smaller than 6' do
+      it 'returns largest reading chunk that is smaller than or equal to 6' do
         diary = Diary.new
         diary_entry1 = DiaryEntry.new("Monday", "I woke up and did some coding")
         diary_entry2 = DiaryEntry.new("Tuesday", "Did some more coding")
