@@ -25,6 +25,8 @@ class Diary
                         # the number of words the user can read per minute
     # Returns an integer representing an estimate of the reading time in minutes
     # if the user were to read all entries in the diary.
+    (count_words.to_f / wpm).ceil
+
   end
 
   def find_best_entry_for_reading_time(wpm, minutes)
@@ -35,5 +37,13 @@ class Diary
     # Returns an instance of diary entry representing the entry that is closest 
     # to, but not over, the length that the user could read in the minutes they
     # have available given their reading speed.
+    words_to_read = wpm * minutes
+    filtered_array = @diary_entries.select {|entry|
+      entry.count_words <= words_to_read
+    }
+    largest_entry = filtered_array.max_by {|entry|
+      entry.count_words
+    }
+    largest_entry
   end
 end
